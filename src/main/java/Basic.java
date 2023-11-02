@@ -1,3 +1,4 @@
+import com.sun.deploy.security.SelectableSecurityManager;
 
 /**
  * @autor Sidostsova Olga
@@ -5,37 +6,35 @@
 
 public class Basic {
     public static void main(String[] args) {
-
         Integer[] array = new Integer[20];
-        array[0] = -10 + (int) (Math.random() * 21);
-        System.out.print(array[0]);
 
-        int min = array[0];
-        int indexMin = 0;
-
-        int max = array[0];
-        int indexMax = 0;
-
-        for (int i = 1; i < array.length; i++) {
-            array[i] = -10 + (int) (Math.random() * 21);
-            System.out.print(" " + array[i]);
-            if (array[i] > max) {
-                max = array[i];
-                indexMax = i;
-            }
-            if (array[i] < min) {
-                min = array[i];
-                indexMin = i;
-            }
-        }
-
-        System.out.println("\nMin под номером " + indexMin + " со значением " + min);
-        System.out.println("Max под номером " + indexMax + " со значением " + max);
-        array[indexMin] = max;
-        array[indexMax] = min;
-
+        int min = 20;
+        int max = -20;
+        System.out.println("Исходный массив");
         for (int i = 0; i < array.length; i++) {
+            array[i] = (int) (Math.random() * 21) - 10;
             System.out.print(array[i] + " ");
+            if ((array[i] > 0) && (array[i] < min)) {
+                min = array[i];
+            }
+            if ((array[i] < 0) && (array[i] > max)) {
+                max = array[i];
+            }
         }
+        System.out.println("\nМинимальный положительный = " + min);
+        System.out.println("Максимальный отрицательный = " + max);
+
+        if ((min < 20) && (max > -20)) {
+            System.out.println("Массив после переставновки максимумов и минимумов");
+            for (int i = 0; i < array.length; i++) {
+                if (array[i] == min) {
+                    array[i] = max;
+                } else if (array[i] == max) {
+                    array[i] = min;
+                }
+                System.out.print(array[i] + " ");
+            }
+        } else System.out.println("\nВсе числа или положительные или отрицательные");
+
     }
 }
